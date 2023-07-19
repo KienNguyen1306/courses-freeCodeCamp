@@ -154,7 +154,7 @@ function bouncer(arr) {
     }
   }
   console.log(resArr);
-  return filteredArr;
+  return resArr;
 }
 bouncer([7, "ate", "", false, 9]);
 
@@ -171,8 +171,6 @@ function getIndexToIns(arr, num) {
   return arr.length;
 }
 
-
-
 //chunkArrayInGroups(["a", "b", "c", "d"], 2) return [["a", "b"], ["c", "d"]]
 //chunkArrayInGroups([0, 1, 2, 3, 4, 5], 3) return  [[0, 1, 2], [3, 4, 5]]
 function chunkArrayInGroups(arr, size) {
@@ -180,5 +178,137 @@ function chunkArrayInGroups(arr, size) {
   for (let i = 0; i < arr.length; i += size) {
     newArr.push(arr.slice(i, i + size));
   }
+  console.log("new", newArr);
   return newArr;
 }
+
+chunkArrayInGroups(["a", "b", "c", "d"], 2);
+
+//sumAll([4,1])nên trả về 10 vì tổng của tất cả các số từ 1 đến 4 là 10.
+function sumAll(arr) {
+  let max = Math.max(arr[0], arr[1]);
+  let min = Math.min(arr[0], arr[1]);
+  let sum = 0;
+  for (let i = min; i <= max; i++) {
+    sum += i;
+  }
+  console.log("sum", sum);
+}
+
+sumAll([1, 4]);
+
+//diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]) return [4].
+//diffArray([1, "calf", 3, "piglet"], [1, "calf", 3, 4]) return ["piglet", 4].
+
+function diffArray(arr1, arr2) {
+  const newArr = [];
+  function onlyInFirst(first, second) {
+    for (let i = 0; i < first.length; i++) {
+      if (second.indexOf(first[i]) === -1) {
+        // kt first[i] có nằm trong thì trả về 1 ngược lại là -1
+        newArr.push(first[i]);
+      }
+    }
+  }
+  onlyInFirst(arr1, arr2);
+  onlyInFirst(arr2, arr1);
+  return newArr;
+}
+diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+
+// destroyer([1, 2, 3, 1, 2, 3], 2, 3) return  [1, 1].
+// destroyer([3, 5, 1, 2, 2], 2, 3, 5) return [1].
+function destroyer(arr) {
+  const valsToRemove = Array.from(arguments).slice(1); // arguments  chứa tất cả các đối số được truyền vào hàm đó
+  console.log(valsToRemove);
+  let res = arr.filter((val) => !valsToRemove.includes(val));
+  console.log("res", res);
+  return res;
+}
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+//whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" }) return [{ first: "Tybalt", last: "Capulet" }].
+
+function whatIsInAName(collection, source) {
+  const key = Object.keys(source);
+  console.log("key", key);
+  let res = collection.filter((obj) => {
+    for (let i = 0; i < key.length; i++) {
+      if (obj[key[i]] !== source[key[i]]) {
+        return false;
+      }
+    }
+    return true;
+  });
+  console.log("key", res);
+  return res;
+}
+
+whatIsInAName(
+  [
+    { first: "Romeo", last: "Montague" },
+    { first: "Mercutio", last: null },
+    { first: "Tybalt", last: "Capulet" },
+  ],
+  { last: "Capulet" }
+);
+
+//myReplace("Let us go to the store", "store", "mall") return  'Let us go to the mall'.
+// myReplace("His name is Tom", "Tom", "john") return  'His name is John'.
+function myReplace(str, before, after) {
+  if (before[0] === before[0].toUpperCase()) {
+    after = after[0].toUpperCase() + after.slice(1);
+  }
+  str = str.replace(before, after);
+  return str;
+}
+
+myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+
+//uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]) return [1, 3, 2, 5, 4]
+//uniteUnique([1, 2, 3], [5, 2, 1]) return [1, 2, 3, 5]
+
+function uniteUnique(arr) {
+  const args = [...arguments];
+  console.log(args);
+  const result = [];
+  for (let i = 0; i < args.length; i++) {
+    for (let j = 0; j < args[i].length; j++) {
+      if (!result.includes(args[i][j])) {
+        result.push(args[i][j]);
+      }
+    }
+  }
+  return result;
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
+// convertHTML("Dolce & Gabbana") return 'Dolce &amp; Gabbana'
+// convertHTML("Hamburgers < Pizza < Tacos") return 'Hamburgers &lt; Pizza &lt; Tacos'
+function convertHTML(string) {
+  const html = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&apos;",
+  };
+  let newArr = string.split("");
+  console.log("newArr", newArr);
+
+  let res = newArr.map((ite) => html[ite] || ite);
+  console.log("res", res.join(""));
+  return res.join("");
+}
+
+convertHTML("Dolce & Gabbana");
+
+//dropElements([1, 2, 3, 4], function(n) {return n >= 3;}) return [3, 4].
+function dropElements(arr, func) {
+  let res = arr.filter(func);
+  console.log(res);
+  return res;
+}
+dropElements([1, 2, 3, 9, 2], (n) => n > 2);
