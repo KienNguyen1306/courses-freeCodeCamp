@@ -105,7 +105,6 @@ function trimString(str, num) {
     console.log("res", str);
   }
 }
-
 trimString("nguyen duc kien", 5);
 
 //findElement([1, 3, 5, 8, 9, 10], function(num) { return num % 2 === 0; }) return 8.
@@ -271,7 +270,7 @@ myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
 
 function uniteUnique(arr) {
   const args = [...arguments];
-  console.log(args);
+  console.log("args", args);
   const result = [];
   for (let i = 0; i < args.length; i++) {
     for (let j = 0; j < args[i].length; j++) {
@@ -312,3 +311,25 @@ function dropElements(arr, func) {
   return res;
 }
 dropElements([1, 2, 3, 9, 2], (n) => n > 2);
+
+// tổng của tất cả các số nguyên tố nhỏ hơn hoặc bằng num
+
+function isPrime(number) {
+  if (number <= 1) return false;
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) return false;
+  }
+  return true;
+}
+
+function sumPrimes(num) {
+  let sum = 0;
+  for (let j = 1; j <= num; j++) {
+    if (isPrime(j)) {
+      sum += j;
+    }
+  }
+  console.log("sum", sum);
+}
+
+sumPrimes(10);
