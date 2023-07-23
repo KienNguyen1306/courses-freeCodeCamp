@@ -229,4 +229,118 @@ function getAverage(marks) {
   return Math.floor(sum / marks.length);
 }
 
+// removeChar('eloquent'), 'loquen')
+//removeChar('country'), 'ountr');
 
+function removeChar(str) {
+  console.log(str.slice(1, str.length - 1));
+}
+
+removeChar("eloquent");
+
+//[1,-4,7,12] => 1 + 7 + 12 = 20
+function positiveSum(arr) {
+  let sum = 0;
+  for (let i of arr) {
+    if (i > 0) {
+      sum += i;
+    }
+  }
+  console.log("sum", sum);
+  return sum;
+}
+positiveSum([1, -4, 7, 12]);
+
+//('+', 4, 7) --> 11
+// ('-', 15, 18) --> -3
+function basicOp(operator, num1, num2) {
+  switch (operator) {
+    case "+":
+      return num1 + num2;
+    case "-":
+      return num1 - num2;
+    case "*":
+      return num1 * num2;
+    case "/":
+      return num1 / num2;
+    default:
+      return "error";
+  }
+}
+let yu = basicOp("+", 4, 7);
+console.log(yu);
+
+//6, "I"     -> "IIIIII"
+// 5, "Hello" -> "HelloHelloHelloHelloHello"
+
+function repeatStr(n, s) {
+  let res = "";
+  for (let i = 0; i < n; i++) {
+    res += s;
+  }
+  console.log(res);
+  return res;
+}
+repeatStr(6, "I");
+
+//"Robin Singh" ==> ["Robin", "Singh"]
+
+function stringToArray(string) {
+  return string.split(" ");
+}
+
+//noSpace('8 j 8   mBliB8g  imjB8B8  jl  B'), '8j8mBliB8gimjB8B8jlB')
+function noSpace(x) {
+  let res = "";
+  for (let i of x) {
+    if (i !== " ") {
+      res += i;
+    }
+  }
+  console.log(res);
+  return res;
+}
+noSpace("8 j 8   mBliB8g  imjB8B8  jl  B");
+
+//[1, 2, 3] --> [2, 4, 6]
+function maps(x) {
+  return x.map((re) => re * 2);
+}
+
+// hero(10, 5), true)
+//hero(7, 4), false)
+function hero(bullets, dragons) {
+  //Get Coding!
+  if (bullets >= dragons * 2) {
+    return true;
+  }
+  return false;
+}
+
+// sum two array arrayPlusArray([1, 2, 3], [4, 5, 6]), 21);
+//arrayPlusArray([-1, -2, -3], [-4, -5, -6]), -21);
+function sumArray(arr) {
+  let sum = 0;
+  for (let i of arr) {
+    sum += i;
+  }
+  return sum;
+}
+
+function arrayPlusArray(arr1, arr2) {
+  return sumArray(arr1) + sumArray(arr2);
+}
+
+// createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]), "(123) 456-7890")
+
+function createPhoneNumber(numbers) {
+  if (numbers.length !== 10) {
+    return "error";
+  }
+
+  const area = numbers.slice(0, 3).join("");
+  const first = numbers.slice(3, 6).join("");
+  const second = numbers.slice(6, 10).join("");
+
+  return `(${area}) ${first}-${second}`;
+}
